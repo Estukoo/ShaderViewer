@@ -86,8 +86,8 @@ void ShaderUtil::LoadImage(const std::string &image_file, unsigned int slot)
 int ShaderUtil::GetUniformLocation(const std::string& name)
 {
 	int location = glGetUniformLocation(mProgramId, name.c_str());
-	if (location == -1)
-		printf("Uniform could not be found (or may be there's an unused uniform) : %s\n", name.c_str());
+	// if (location == -1)
+	// 	printf("Uniform could not be found (or may be there's an unused uniform) : %s\n", name.c_str());
 
 	return location;
 }

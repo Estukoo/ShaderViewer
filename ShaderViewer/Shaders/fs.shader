@@ -8,4 +8,5 @@ in vec2 texCoord;
 
 void main() {
     FragColor = texture(tex, texCoord) + color;
+    //FragColor = color;
 }

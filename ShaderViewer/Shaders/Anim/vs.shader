@@ -1,43 +1,23 @@
 #version 330 core
 
 uniform float time;
+uniform vec2 scale;
 
 in vec2 aPos;
-in vec4 vert_color;
+in vec4 aVertColor;
+in vec2 aTexCoord;
+
 out vec4 color;
+out vec2 texCoord;
 
 // Utils
-vec2 rotate(vec2 v, float a)
-{
-    return vec2(v.x * cos(a) - v.y * sin(a), v.x * sin(a) + v.y * cos(a));
-}
-
-vec2 swirl(vec2 v, float a, float s)
-{
-    float r = length(v);
-    float theta = atan(v.y, v.x) + r * a;
-    return vec2(r * cos(theta), r * sin(theta)) * s;
-}
-
-vec2 pulse(vec2 v, float a, float s)
-{
-    float r = length(v);
-    return v * (sin(r * a + time * s) + 1.0) * 0.5;
-}
-
-vec2 waves(vec2 v, float a, float s)
-{
-    return vec2(v.x + sin(v.y * a + time * s), v.y + sin(v.x * a + time * s));
-}
-
 vec2 wave(vec2 v, float a, float s)
 {
     return vec2(v.x + sin(v.y * a + time * s), v.y);
 }
 
-
 // Effects
-vec4 Effect1()
+vec4 ZoomSpin()
 {
     float r = time * (0.5 + 1 * 0.05);
     mat2 rot = mat2(cos(r), sin(r), -sin(r), cos(r));
@@ -48,7 +28,7 @@ vec4 Effect1()
 }
 
 
-vec4 Effect2()
+vec4 ZoomSpinExplode()
 {
     float r = time * (0.5 + 1 * 0.05);
     mat2 rot = mat2(cos(r), sin(r), -sin(r), cos(r));
@@ -58,7 +38,7 @@ vec4 Effect2()
     return vec4(rotated, z, 1.0);
 }
 
-vec4 Effect3()
+vec4 ZoomSpinMad()
 {
     vec2 offset = vec2(sin(time * 20.0), cos(time * 15.0)) * 0.1;
     vec2 distort = vec2(sin(time * 50.0), cos(time * 35.0)) * 0.05;
@@ -67,18 +47,58 @@ vec4 Effect3()
     return vec4(rotated, z, 1.0);
 }
 
-vec4 Effect4()
+vec4 CaGlisse()
 {
     vec2 waved = wave(aPos, 10.0, 2.0);
     return vec4(waved, 0.0, 1.0);
 }
 
+vec4 Elastic()
+{
+    float x = aPos.x + sin(time + aPos.y * 10.0) * 0.1;
+    float y = aPos.y + sin(time + aPos.x * 10.0) * 0.1;
+    return vec4(x, y, 0.0, 1.0);
+}
+
+vec4 Jiggle()
+{
+    vec2 pos = aPos + vec2(sin(aPos.x * 10.0 + time * 5.0), cos(aPos.y * 10.0 + time * 5.0)) * 0.1;
+    return vec4(pos, 0.0, 1.0);
+}
+
+vec4 Spin()
+{
+    float r = time * (0.5 + gl_InstanceID * 0.05);
+    mat2 rot = mat2(cos(r), sin(r), -sin(r), cos(r));
+    return vec4((rot * aPos) * scale, 0.0, 1.0);
+}
+
+vec4 Pulse()
+{
+    float pulse = sin(time * 2.0) * 0.5 + 0.5;
+    vec2 pulsePos = aPos * pulse;
+    return vec4(pulsePos, 0.0, 1.0);
+}
+
+vec4 Bounce()
+{
+    float bounce = tan(time * 2.5)  * 1.5 + 0.5;
+    vec2 boucePos = aPos * bounce;
+    return vec4(boucePos, 0.0, 1.0);
+}
+
 void main()
 {
-    color = vert_color;
+    color = aVertColor;
+    texCoord = aTexCoord;
 
-    gl_Position = Effect3();
-    gl_Position = Effect1();
-    gl_Position = Effect2();
-    gl_Position = Effect4();
+    gl_Position = ZoomSpin();
+    gl_Position = ZoomSpinExplode();
+    gl_Position = ZoomSpinMad();
+    gl_Position = CaGlisse();
+    gl_Position = Elastic();
+    gl_Position = Jiggle();
+    gl_Position = Spin();
+    gl_Position = Pulse();
+    gl_Position = Bounce();
 }

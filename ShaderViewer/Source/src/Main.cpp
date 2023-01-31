@@ -17,6 +17,8 @@ void WindowGUI::PreRender()
 	/* Textures */
 	shader_util->LoadImage("Assets/image.png", 0);
 
+	shader_util->SetUniform2f("scale", 0.5, (width/height) * 0.5);
+
 	/* Uniforms */
 	shader_util->SetUniform1i("tex", 0);
 }
@@ -34,7 +36,7 @@ int main()
 	WindowGUI* window_gui = new WindowGUI(1280, 720, "Hello Shader");
 
 	window_gui->InitGLEW();
-	window_gui->InitShaderUtil("Shaders/Anim/jiggle.glsl", "Shaders/fs.shader");
+	window_gui->InitShaderUtil("Shaders/Anim/vs.shader", "Shaders/fs.shader");
 	window_gui->Loop(1.0f, 1.0f, 1.0f, 1.0f);
 
 	delete window_gui;
