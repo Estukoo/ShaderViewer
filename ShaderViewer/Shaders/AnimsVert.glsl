@@ -93,12 +93,12 @@ void main()
     texCoord = aTexCoord;
 
     gl_Position = ZoomSpin();
-    gl_Position = ZoomSpinExplode();
-    gl_Position = ZoomSpinMad();
-    gl_Position = CaGlisse();
-    gl_Position = Elastic();
-    gl_Position = Jiggle();
-    gl_Position = Spin();
-    gl_Position = Pulse();
-    gl_Position = Bounce();
+    gl_Position += Spin();
+    gl_Position += Jiggle();
+    gl_Position += Elastic();
+    gl_Position += CaGlisse();
+    gl_Position += ZoomSpinExplode();
+    gl_Position += Bounce();
+    gl_Position += ZoomSpinMad();
+    gl_Position += Pulse();
 }
