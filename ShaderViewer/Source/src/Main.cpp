@@ -9,21 +9,22 @@
 
 void WindowGUI::PreRender()
 {
-	shader_util->SetAttribute<float>("vert", *Vertices);
-	shader_util->SetAttribute<float>("vert_color", *VertColors);
-	shader_util->SetAttribute<float>("vertexTexCoord", *TexCoords);
-	
-	shader_util->Use();
+	/* Attributes */
+	shader_util->SetAttribute<float>("aPos", *Vertices);
+	shader_util->SetAttribute<float>("aVertColor", *VertColors);
+	shader_util->SetAttribute<float>("aTexCoord", *TexCoords);
 
-	shader_util->SetUniform2f("scale", 0.5, (width / height) * 0.5);
-
+	/* Textures */
 	shader_util->LoadImage("Assets/image.png", 0);
+
+	/* Uniforms */
 	shader_util->SetUniform1i("tex", 0);
 }
 
 void WindowGUI::Render()
 {
-	shader_util->SetUniform1f("rotation", time);
+	/* Uniforms */
+	shader_util->SetUniform1f("time", time);
 
 	shader_util->DrawVertex(*Vertices);
 }
@@ -33,9 +34,9 @@ int main()
 	WindowGUI* window_gui = new WindowGUI(1280, 720, "Hello Shader");
 
 	window_gui->InitGLEW();
-	window_gui->InitShaderUtil("Shaders/vs.shader", "Shaders/fs.shader");
+	window_gui->InitShaderUtil("Shaders/Anim/jiggle.glsl", "Shaders/fs.shader");
 	window_gui->Loop(1.0f, 1.0f, 1.0f, 1.0f);
 
-	// delete window_gui;
+	delete window_gui;
 	return 0;
 }

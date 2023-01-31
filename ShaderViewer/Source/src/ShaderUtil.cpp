@@ -87,7 +87,7 @@ int ShaderUtil::GetUniformLocation(const std::string& name)
 {
 	int location = glGetUniformLocation(mProgramId, name.c_str());
 	if (location == -1)
-		std::cerr << "Uniform could not be found (or may be there's an unused uniform)" << std::endl;
+		printf("Uniform could not be found (or may be there's an unused uniform) : %s\n", name.c_str());
 
 	return location;
 }

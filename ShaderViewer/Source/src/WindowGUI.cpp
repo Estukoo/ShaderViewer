@@ -18,7 +18,6 @@ WindowGUI::WindowGUI(unsigned int width, unsigned int height, const std::string&
 
 WindowGUI::~WindowGUI() {
     glfwTerminate();
-    //delete shader_util;
 }
 
 void WindowGUI::InitGLEW()
@@ -40,6 +39,8 @@ void WindowGUI::InitShaderUtil(const std::string& vertex_shader_file, const std:
 
 void WindowGUI::Loop(float red, float green, float blue, float alpha)
 {        
+    shader_util->Use();
+    
     CalculateUtilsMembers();
     
     PreRender();
