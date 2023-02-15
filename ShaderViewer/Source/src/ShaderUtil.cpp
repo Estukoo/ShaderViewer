@@ -1,11 +1,13 @@
 #define STB_IMAGE_IMPLEMENTATION
 
 #include "ShaderUtil.h"
-#include "Texture.h"
 
 #include <GL/glew.h>
 #include <iostream>
 #include <fstream>
+
+#define STB_IMAGE_IMPLEMENTATION
+#include <stb_image/stb_image.h>
 
 
 /* Public */
@@ -84,8 +86,34 @@ void ShaderUtil::SetUniform4f(const std::string& name, float v0, float v1, float
 
 void ShaderUtil::LoadImage(const std::string &image_file, unsigned int slot)
 {
-	Texture* texture = new Texture(image_file);
-	texture->Bind(slot);
+    int width, height, num_channels;
+    unsigned char* data = stbi_load(image_file.c_str(), &width, &height, &num_channels, 0);
+    if (!data) {
+        std::cerr << "Error loading image: " << image_file << std::endl;
+        return;
+    }
+
+    glActiveTexture(GL_TEXTURE0 + slot);
+    GLuint texture_id;
+    glGenTextures(1, &texture_id);
+    glBindTexture(GL_TEXTURE_2D, texture_id);
+
+    if (num_channels == 3) {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+    }
+    else if (num_channels == 4) {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+    }
+    else {
+        std::cerr << "Unsupported number of channels: " << num_channels << std::endl;
+        stbi_image_free(data);
+        return;
+    }
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    stbi_image_free(data);
 }
 
 int ShaderUtil::GetUniformLocation(const std::string& name)

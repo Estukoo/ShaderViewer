@@ -10,6 +10,8 @@
 
 const int undef = 0;
 
+uniform float rad;
+
 layout (binding = 1, std140) uniform vp_c1
 {
     vec4 vp_c1_data[0x1000];
@@ -1916,6 +1918,14 @@ void main()
     // 0x0013D8: 0xEFF07F800A87FF01 Ast
     out_attr2.z = temp_577;
     // 0x0013E8: 0xE30000000007000F Exit
-    //gl_Position = vec4(in_attr0.x, in_attr0.y, in_attr0.z, 1.0);
+    
+    vec4 rotatedPos = vec4(
+        cos(rad) * in_attr0.x + sin(rad) * in_attr0.z, 
+        cos(rad) * in_attr0.y - sin(rad) * in_attr0.x, 
+        sin(rad) * in_attr0.y + cos(rad) * in_attr0.z, 
+        1.0
+    );
+    gl_Position = vec4(rotatedPos.x, rotatedPos.y, rotatedPos.z, 1.0);
+    // gl_Position = vec4(in_attr0.x, in_attr0.y, in_attr0.z, 1.0);
     return;
 }

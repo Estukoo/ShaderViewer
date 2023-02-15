@@ -29,7 +29,6 @@
     <ClInclude Include="Source\include\GL\glxew.h" />
     <ClInclude Include="Source\include\GL\wglew.h" />
     <ClInclude Include="Source\include\stb_image\stb_image.h" />
-    <ClInclude Include="Source\src\Texture.h" />
     <ClInclude Include="Source\src\ShaderUtil.h" />
     <ClInclude Include="Source\src\Type\BufArray.h" />
     <ClInclude Include="Source\src\Utils\VertexBuffer.hpp" />
@@ -51,7 +50,6 @@
   <ItemGroup>
     <ClCompile Include="Source\src\Main.cpp" />
     <ClCompile Include="Source\src\ShaderUtil.cpp" />
-    <ClCompile Include="Source\src\Texture.cpp" />
     <ClCompile Include="Source\src\WindowGUI.cpp" />
   </ItemGroup>
   <ItemGroup>
