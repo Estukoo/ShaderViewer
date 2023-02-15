@@ -56,7 +56,7 @@ class FileProcessor:
     def write_output(self):
         with open("output.txt", "w") as f:
             for vector_name, data in self.datas.items():
-                f.write("BufArray<float>* {} = new BufArray<float>({{\n".format(vector_name))
+                f.write("BufArray<float> {}({{\n".format(vector_name))
                 nb_vectors = len(data.keys())
                 nb_values = len(data[list(data.keys())[0]])
                 for i in range(nb_values):
@@ -92,7 +92,7 @@ class FileProcessor:
 
     def write_output_new(self, var_name):
         with open("output.txt", "w") as f:
-            f.write("BufArray<float>* {} = new BufArray<float>({{\n".format(var_name))
+            f.write("BufArray<float> {}({{\n".format(var_name))
             data = self.datas["data"]
             nb_values = len(data)
             for i in range(nb_values):

@@ -2,7 +2,7 @@
 
 // Vertex Shader
 
-BufArray<float>* in_attr0 = new BufArray<float>({
+BufArray<float> in_attr0({
     0.49039      , -0.5         , -0.09754     ,
     0.46194      , -0.5         , -0.19134     ,
     0.49039      , 0.5          , -0.09754     ,
@@ -197,7 +197,7 @@ BufArray<float>* in_attr0 = new BufArray<float>({
     0.5          , 0.5          , 0.0          
 }, 3 );
 
-BufArray<float>* in_attr1 = new BufArray<float>({
+BufArray<float> in_attr1({
     0.0          , 1.0          ,
     0.03137      , 1.0          ,
     0.0          , 0.0          ,
@@ -392,7 +392,7 @@ BufArray<float>* in_attr1 = new BufArray<float>({
     0.96863      , 0.0          
 }, 2 );
 
-BufArray<float>* in_attr3 = new BufArray<float>({
+BufArray<float> in_attr3({
     0.0          , 0.0          , 0.0          , 268435000.0  ,
     0.0          , 0.0          , 0.0          , 268435000.0  ,
     0.0          , 0.0          , 0.0          , 268435000.0  ,
@@ -587,7 +587,7 @@ BufArray<float>* in_attr3 = new BufArray<float>({
     0.0          , 0.0          , 0.0          , 268435000.0  
 }, 4 );
 
-BufArray<float>* in_attr4 = new BufArray<float>({
+BufArray<float> in_attr4({
     0.0          , 0.0          , 0.0          , 0.0          ,
     0.0          , 0.0          , 0.0          , 0.0          ,
     0.0          , 0.0          , 0.0          , 0.0          ,
@@ -782,7 +782,7 @@ BufArray<float>* in_attr4 = new BufArray<float>({
     0.0          , 0.0          , 0.0          , 0.0          
 }, 4 );
 
-BufArray<float>* in_attr5 = new BufArray<float>({
+BufArray<float> in_attr5({
     2.0          , 7.0          , 2.0          , 1.0          ,
     2.0          , 7.0          , 2.0          , 1.0          ,
     2.0          , 7.0          , 2.0          , 1.0          ,
@@ -977,7 +977,7 @@ BufArray<float>* in_attr5 = new BufArray<float>({
     2.0          , 7.0          , 2.0          , 1.0          
 }, 4 );
 
-BufArray<float>* in_attr6 = new BufArray<float>({
+BufArray<float> in_attr6({
     0.51719      , 0.92534      , 0.61921      , 0.67698      ,
     0.51719      , 0.92534      , 0.61921      , 0.67698      ,
     0.51719      , 0.92534      , 0.61921      , 0.67698      ,
@@ -1172,7 +1172,7 @@ BufArray<float>* in_attr6 = new BufArray<float>({
     0.51719      , 0.92534      , 0.61921      , 0.67698      ,
 }, 4 );
 
-BufArray<float>* vp_c1_data = new BufArray<float>({
+BufArray<float> vp_c1_data({
     7.34684e-40f , 1.46937e-39f , 2.93874e-39f , 5.87747e-39f ,
     -0.5f        , 0.0f         , 0.0f         , 0.0f         ,
     0.0f         , 0.0f         , 0.0f         , 0.0f         ,
@@ -5271,7 +5271,7 @@ BufArray<float>* vp_c1_data = new BufArray<float>({
     6.15927e-41f , 0.0f         , 5.05e-41f    , 0.0f         
 }, 4 );
 
-BufArray<float>* vp_c8_data = new BufArray<float>({
+BufArray<float> vp_c8_data({
     -0.79242f    , -3.72529e-09f, -0.60998f    , 8.53246f     ,
     0.04279f     , 0.99754f     , -0.05559f    , -5.0081f     ,
     0.60848f     , -0.07015f    , -0.79047f    , 6.45959f     ,
@@ -9370,7 +9370,7 @@ BufArray<float>* vp_c8_data = new BufArray<float>({
     0.0f         , 0.0f         , 0.0f         , 0.0f         
 }, 4 );
 
-BufArray<float>* vp_c9_data = new BufArray<float>({
+BufArray<float> vp_c9_data({
     0.0f         , 0.0f         , 0.0f         , 0.0f         ,
     4.85607e+33f , 1.20536e+27f , 6.7421e+22f  , 4.86011e+30f ,
     1.35926e-43f , 0.0f         , 0.0f         , 0.0f         ,
@@ -13469,7 +13469,7 @@ BufArray<float>* vp_c9_data = new BufArray<float>({
     0.0f         , 0.0f         , 0.0f         , 0.0f         
 }, 4 );
 
-BufArray<float>* vp_c10_data = new BufArray<float>({
+BufArray<float> vp_c10_data({
     1.0f         , 1.0f         , 1.0f         , 1.0f         ,
     1.0f         , 1.0f         , 1.0f         , 1.0f         ,
     718.5f       , 1.0f         , 1.0f         , 1.5f         ,
@@ -17570,7 +17570,7 @@ BufArray<float>* vp_c10_data = new BufArray<float>({
 
 // Pixel Shader
 
-BufArray<float>* fp_c8_data = new BufArray<float>({
+BufArray<float> fp_c8_data({
     -0.79242f    , -3.72529e-09f, -0.60998f    , 8.53246f     ,
     0.04279f     , 0.99754f     , -0.05559f    , -5.0081f     ,
     0.60848f     , -0.07015f    , -0.79047f    , 6.45959f     ,
@@ -21669,7 +21669,7 @@ BufArray<float>* fp_c8_data = new BufArray<float>({
     0.0f         , 0.0f         , 0.0f         , 0.0f         
 }, 4 );
 
-BufArray<float>* fp_c9_data = new BufArray<float>({
+BufArray<float> fp_c9_data({
     0.0f         , 0.0f         , 0.0f         , 0.0f         ,
     4.85607e+33f , 1.20536e+27f , 6.7421e+22f  , 4.86011e+30f ,
     1.35926e-43f , 0.0f         , 0.0f         , 0.0f         ,
