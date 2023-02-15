@@ -1,25 +1,25 @@
 #include "WindowGUI.h"
 
-WindowGUI::WindowGUI(unsigned int width, unsigned int height, const std::string& title) : width(width), height(height) {
+WindowGUI::WindowGUI(unsigned int width, unsigned int height, const std::string& title) : mWidth(width), mHeight(height), mTime(0.0f) {
     if (!glfwInit()) {
         std::cerr << "Failed to initialize GLFW." << std::endl;
         exit(-1);
     }
 
-    window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
-    if (!window) {
+    mWindow = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
+    if (!mWindow) {
         std::cerr << "Failed to create GLFW window." << std::endl;
         glfwTerminate();
         exit(-1);
     }
 
-    glfwMakeContextCurrent(window);
+    glfwMakeContextCurrent(mWindow);
 }
 
 WindowGUI::~WindowGUI() {
     glfwTerminate();
     
-    delete window;
+    delete mWindow;
 }
 
 void WindowGUI::InitGLEW()
@@ -36,8 +36,8 @@ void WindowGUI::InitGLEW()
 
 void WindowGUI::InitShaderUtil(const std::string& vertex_shader_file, const std::string& fragment_shader_file)
 {
-    shader_util = ShaderUtil(vertex_shader_file, fragment_shader_file);
-    shader_util.Use();
+    shaderUtil = ShaderUtil(vertex_shader_file, fragment_shader_file);
+    shaderUtil.Use();
 }
 
 void WindowGUI::Clear(float red, float green, float blue, float alpha)
@@ -56,20 +56,28 @@ void WindowGUI::Loop()
         glClear(GL_COLOR_BUFFER_BIT);
 
         CalculateUtilsMembers();
+        
+        mCamera.Inputs(mWindow);
+        mCamera.Matrix(45.0f, 0.1f, 100.0f, shaderUtil, "camMatrix");
 
         Render();
 
-        glfwSwapBuffers(window);
+        glfwSwapBuffers(mWindow);
         glfwPollEvents();
     }
 }
 
+void WindowGUI::SetCamera(const Camera &camera)
+{
+    mCamera = camera;
+}
+
 void WindowGUI::CalculateUtilsMembers()
 {
-	glfwGetFramebufferSize(window, &width, &height);
-	time = (float)glfwGetTime();
+	glfwGetFramebufferSize(mWindow, &mWidth, &mHeight);
+	mTime = (float)glfwGetTime();
 }
 
 bool WindowGUI::ShouldClose() {
-    return glfwWindowShouldClose(window);
+    return glfwWindowShouldClose(mWindow);
 }
