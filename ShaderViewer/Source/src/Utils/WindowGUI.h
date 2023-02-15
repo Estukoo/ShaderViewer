@@ -1,12 +1,10 @@
 #pragma once
-#ifndef WINDOW_GUI_H
-#define WINDOW_GUI_H
+
+#include <iostream>
 
 #include "ShaderUtil.h"
 
-#include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <iostream>
 
 class WindowGUI {
 public:
@@ -15,10 +13,11 @@ public:
 
 	void InitGLEW();
 	void InitShaderUtil(const std::string& vertex_shader_file, const std::string& fragment_shader_file);
-	void Loop(float red, float green, float blue, float alpha);
+	void Clear(float red, float green, float blue, float alpha);
+	bool ShouldClose();
+	void Loop();
 	void PreRender();
 	void Render();
-	bool ShouldClose();
 
 	/* Utils members*/
 	int width;
@@ -29,7 +28,5 @@ private:
 	void CalculateUtilsMembers();
 	
 	GLFWwindow* window;
-	ShaderUtil* shader_util;
+	ShaderUtil shader_util;
 };
-
-#endif

@@ -1,6 +1,6 @@
 #include "WindowGUI.h"
 
-WindowGUI::WindowGUI(unsigned int width, unsigned int height, const std::string& title) {
+WindowGUI::WindowGUI(unsigned int width, unsigned int height, const std::string& title) : width(width), height(height) {
     if (!glfwInit()) {
         std::cerr << "Failed to initialize GLFW." << std::endl;
         exit(-1);
@@ -18,6 +18,8 @@ WindowGUI::WindowGUI(unsigned int width, unsigned int height, const std::string&
 
 WindowGUI::~WindowGUI() {
     glfwTerminate();
+    
+    delete window;
 }
 
 void WindowGUI::InitGLEW()
@@ -34,18 +36,20 @@ void WindowGUI::InitGLEW()
 
 void WindowGUI::InitShaderUtil(const std::string& vertex_shader_file, const std::string& fragment_shader_file)
 {
-    shader_util = new ShaderUtil(vertex_shader_file, fragment_shader_file);
+    shader_util = ShaderUtil(vertex_shader_file, fragment_shader_file);
+    shader_util.Use();
 }
 
-void WindowGUI::Loop(float red, float green, float blue, float alpha)
+void WindowGUI::Clear(float red, float green, float blue, float alpha)
+{
+    glClearColor(red, green, blue, alpha);
+}
+
+void WindowGUI::Loop()
 {        
-    shader_util->Use();
-    
     CalculateUtilsMembers();
     
     PreRender();
-
-    glClearColor(red, green, blue, alpha);
 
     while (!ShouldClose())
     {

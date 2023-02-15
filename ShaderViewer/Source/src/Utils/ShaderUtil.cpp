@@ -1,14 +1,11 @@
 #define STB_IMAGE_IMPLEMENTATION
 
-#include "ShaderUtil.h"
-
-#include <GL/glew.h>
 #include <iostream>
 #include <fstream>
 
-#define STB_IMAGE_IMPLEMENTATION
-#include <stb_image/stb_image.h>
+#include "ShaderUtil.h"
 
+#include <stb_image/stb_image.h>
 
 /* Public */
 ShaderUtil::ShaderUtil() : mProgramId(0), mVertexShader(0), mFragmentShader(0) {}
@@ -18,10 +15,7 @@ ShaderUtil::ShaderUtil(const std::string& vertex_shader_file, const std::string&
 	Load(vertex_shader_file, fragment_shader_file);
 }
 
-ShaderUtil::~ShaderUtil()
-{
-	Delete();
-}
+ShaderUtil::~ShaderUtil() { /* Delete(); */ }
 
 GLuint ShaderUtil::GetProgram() const
 {

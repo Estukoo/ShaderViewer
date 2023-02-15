@@ -1,7 +1,6 @@
-#include "Type/BufArray.h"
+#include "Utils/Type/BufArray.h"
 
-// Vertex Shader
-
+/* Vertex Shader */
 BufArray<float> in_attr0({
     0.49039      , -0.5         , -0.09754     ,
     0.46194      , -0.5         , -0.19134     ,
@@ -17568,8 +17567,7 @@ BufArray<float> vp_c10_data({
     0.0f         , 0.0f         , 0.0f         , 0.0f         
 }, 4 );
 
-// Pixel Shader
-
+/* Pixel Shader */
 BufArray<float> fp_c8_data({
     -0.79242f    , -3.72529e-09f, -0.60998f    , 8.53246f     ,
     0.04279f     , 0.99754f     , -0.05559f    , -5.0081f     ,

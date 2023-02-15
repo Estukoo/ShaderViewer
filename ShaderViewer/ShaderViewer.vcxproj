@@ -31,7 +31,11 @@
     <ClInclude Include="Source\include\stb_image\stb_image.h" />
     <ClInclude Include="Source\src\ShaderUtil.h" />
     <ClInclude Include="Source\src\Type\BufArray.h" />
+    <ClInclude Include="Source\src\Utils\ShaderUtil.h" />
+    <ClInclude Include="Source\src\Utils\Type\BufArray.h" />
     <ClInclude Include="Source\src\Utils\VertexBuffer.hpp" />
+    <ClInclude Include="Source\src\Utils\WindowGUI.h" />
+    <ClInclude Include="Source\src\VertexBuffer.hpp" />
     <ClInclude Include="Source\src\WindowGUI.h" />
   </ItemGroup>
   <ItemGroup>
@@ -49,8 +53,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\src\Main.cpp" />
-    <ClCompile Include="Source\src\ShaderUtil.cpp" />
-    <ClCompile Include="Source\src\WindowGUI.cpp" />
+    <ClCompile Include="Source\src\Utils\ShaderUtil.cpp" />
+    <ClCompile Include="Source\src\Utils\WindowGUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="Lib\glew32.lib" />

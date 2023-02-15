@@ -1,9 +1,10 @@
 #pragma once
 
+#include <string>
+
 #include "Type/BufArray.h"
 
 #include <GL/glew.h>
-#include <string>
 
 class ShaderUtil {
 public:
