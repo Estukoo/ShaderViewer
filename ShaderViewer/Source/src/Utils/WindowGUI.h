@@ -6,6 +6,8 @@
 
 #include <GLFW/glfw3.h>
 
+class Camera;
+
 class WindowGUI {
 public:
 	WindowGUI();
@@ -19,6 +21,10 @@ public:
 	void Loop();
 	void PreRender();
 	void Render();
+	void SetCamera();
+	 
+	bool GetKey(int key) const;
+	GLFWwindow* GetWindow();
 
 	/* Utils members*/
 	int mWidth;
@@ -29,5 +35,6 @@ private:
 	void CalculateUtilsMembers();
 	
 	GLFWwindow* mWindow;
+	Camera* mCamera;
 	ShaderUtil mShaderUtil;
 };

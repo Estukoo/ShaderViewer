@@ -3,6 +3,7 @@
 #include "VertexBuffer.hpp"
 #include "Utils/WindowGUI.h"
 #include "Utils/ShaderUtil.h"
+#include "Utils/WindowGUI.h"
 
 void WindowGUI::PreRender()
 {
@@ -44,6 +45,7 @@ int main()
 	window_gui.InitGLEW();
 	window_gui.InitShaderUtil("Shaders/BoTW/VS.glsl", "Shaders/BoTW/FS.glsl");
 	window_gui.Clear(1.0f, 1.0f, 1.0f, 1.0f);
+	window_gui.SetCamera();
 	window_gui.Loop();
 
 	return 0;

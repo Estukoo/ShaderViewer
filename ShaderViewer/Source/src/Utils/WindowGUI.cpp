@@ -1,4 +1,8 @@
 #include "WindowGUI.h"
+#include "Camera.h"
+
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 WindowGUI::WindowGUI() : mWidth(0), mHeight(0), mTime(0.0f) {}
 
@@ -23,6 +27,7 @@ WindowGUI::~WindowGUI() {
     glfwTerminate();
     
     delete mWindow;
+    delete mCamera;
 }
 
 void WindowGUI::InitGLEW()
@@ -60,11 +65,30 @@ void WindowGUI::Loop()
 
         CalculateUtilsMembers();
 
+        /* Camera */
+        mCamera->Inputs();
+        mCamera->Matrix(45.0f, 0.1f, 100.0f, mShaderUtil.GetProgram(), "viewProjMatrix"); // Envoyer la matrice de la caméra au shader
+
         Render();
 
         glfwSwapBuffers(mWindow);
         glfwPollEvents();
     }
+}
+
+void WindowGUI::SetCamera()
+{
+    mCamera = new Camera(*this);
+}
+
+bool WindowGUI::GetKey(int key) const
+{
+    return glfwGetKey(mWindow, key) == GLFW_PRESS;
+}
+
+GLFWwindow*  WindowGUI::GetWindow()
+{
+    return mWindow;
 }
 
 void WindowGUI::CalculateUtilsMembers()

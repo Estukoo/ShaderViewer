@@ -31,6 +31,8 @@
     <ClInclude Include="Source\include\stb_image\stb_image.h" />
     <ClInclude Include="Source\src\ShaderUtil.h" />
     <ClInclude Include="Source\src\Type\BufArray.h" />
+    <ClInclude Include="Source\src\Utils\Camera.h" />
+    <ClInclude Include="Source\src\Utils\Camera.hpp" />
     <ClInclude Include="Source\src\Utils\ShaderUtil.h" />
     <ClInclude Include="Source\src\Utils\Type\BufArray.h" />
     <ClInclude Include="Source\src\Utils\VertexBuffer.hpp" />
@@ -53,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\src\Main.cpp" />
+    <ClCompile Include="Source\src\Utils\Camera.cpp" />
     <ClCompile Include="Source\src\Utils\ShaderUtil.cpp" />
     <ClCompile Include="Source\src\Utils\WindowGUI.cpp" />
   </ItemGroup>

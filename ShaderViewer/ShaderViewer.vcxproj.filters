@@ -57,6 +57,24 @@
     <ClInclude Include="Source\src\Type\BufArray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\src\Utils\ShaderUtil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\src\Utils\Type\BufArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\src\Utils\WindowGUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\src\VertexBuffer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\src\Utils\Camera.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\src\Utils\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Lib\glfw3.dll" />
@@ -75,10 +93,13 @@
     <ClCompile Include="Source\src\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\src\ShaderUtil.cpp">
+    <ClCompile Include="Source\src\Utils\ShaderUtil.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\src\WindowGUI.cpp">
+    <ClCompile Include="Source\src\Utils\WindowGUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\src\Utils\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

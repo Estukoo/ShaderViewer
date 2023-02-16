@@ -20,6 +20,8 @@ public:
     void Use() const;
     void Delete() const;
 
+    int GetUniformLocation(const std::string& name);
+
     void SetUniform1i(const std::string& name, int value);
     void SetUniform4i(const std::string& name, int v0, int v1, int v2, int v3);
     void SetUniform1f(const std::string& name, float value);
@@ -41,7 +43,6 @@ private:
     GLuint mVertexShader;
     GLuint mFragmentShader;
     
-    int GetUniformLocation(const std::string& name);
 
     std::string ReadShaderFile(const std::string& file_path);
     GLuint GetCompiledShader(unsigned int shader_type, const std::string& shader_source);

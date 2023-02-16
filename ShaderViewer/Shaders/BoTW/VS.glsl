@@ -11,6 +11,7 @@
 const int undef = 0;
 
 uniform float rad;
+uniform mat4 viewProjMatrix;
 
 layout (binding = 1, std140) uniform vp_c1
 {
@@ -1919,13 +1920,34 @@ void main()
     out_attr2.z = temp_577;
     // 0x0013E8: 0xE30000000007000F Exit
     
+
+    // All axes
+    // vec4 rotatedPos = vec4(
+    //     cos(rad) * in_attr0.x + sin(rad) * in_attr0.z, 
+    //     cos(rad) * in_attr0.y - sin(rad) * in_attr0.x, 
+    //     sin(rad) * in_attr0.y + cos(rad) * in_attr0.z, 
+    //     1.0
+    // );
+    // gl_Position = vec4(rotatedPos.x, rotatedPos.y, rotatedPos.z, 1.0);
+
+    // X Axe
+    // vec4 rotatedPos = vec4(
+    //     in_attr0.x,
+    //     cos(rad) * in_attr0.y - sin(rad) * in_attr0.z,
+    //     sin(rad) * in_attr0.y + cos(rad) * in_attr0.z,
+    //     1.0
+    // );
+    // gl_Position = vec4(rotatedPos.x, rotatedPos.y, rotatedPos.z, 1.0);
+
+    // Y Axe
     vec4 rotatedPos = vec4(
-        cos(rad) * in_attr0.x + sin(rad) * in_attr0.z, 
-        cos(rad) * in_attr0.y - sin(rad) * in_attr0.x, 
-        sin(rad) * in_attr0.y + cos(rad) * in_attr0.z, 
+        cos(rad) * in_attr0.x - sin(rad) * in_attr0.z, 
+        in_attr0.y,
+        sin(rad) * in_attr0.x + cos(rad) * in_attr0.z, 
         1.0
     );
-    gl_Position = vec4(rotatedPos.x, rotatedPos.y, rotatedPos.z, 1.0);
+    gl_Position = viewProjMatrix * vec4(rotatedPos.x, rotatedPos.y, rotatedPos.z, 1.0);
+    
     // gl_Position = vec4(in_attr0.x, in_attr0.y, in_attr0.z, 1.0);
     return;
 }
