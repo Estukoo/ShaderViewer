@@ -4,37 +4,36 @@
 
 #include <string>
 
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+#include<GLFW/glfw3.h>
+#include<glm/glm.hpp>
+#include<glm/gtc/matrix_transform.hpp>
+#include<glm/gtc/type_ptr.hpp>
+#include<glm/gtx/rotate_vector.hpp>
+#include<glm/gtx/vector_angle.hpp>
 
-class Camera {
+class Camera
+{
 public:
-    Camera(WindowGUI& window, glm::vec3 position = glm::vec3(0.0f, 0.0f, 2.0f));
+	// Stores the main vectors of the camera
+	glm::vec3 Position;
+	glm::vec3 Orientation = glm::vec3(0.0f, 0.0f, -1.0f);
+	glm::vec3 Up = glm::vec3(0.0f, 1.0f, 0.0f);
 
-    // Inputs from the user (e.g. keyboard and mouse)
-    void Inputs();
+	// Prevents the camera from jumping around when first clicking left click
+	bool firstClick = true;
 
-    // Get the view matrix for the camera
-    glm::mat4 ViewMatrix() const;
-
-    // Get the projection matrix for the camera
-    glm::mat4 ProjectionMatrix(float fov, float nearPlane, float farPlane) const;
-
-    // Send the camera matrix to a shader program
-    void Matrix(float fov, float nearPlane, float farPlane, GLuint shaderProgram, const std::string& uniformName) const;
-
-private:
+	// Stores the width and height of the window
     WindowGUI& mWindow;
-    glm::vec3 mPosition;
-    glm::vec3 mFront;
-    glm::vec3 mUp;
-    glm::vec3 mRight;
-    glm::vec3 mWorldUp;
-    float mYaw;
-    float mPitch;
-    float mMovementSpeed;
-    float mMouseSensitivity;
-    float mZoom;
+
+	// Adjust the speed of the camera and it's sensitivity when looking around
+	float speed = 1.0f;
+	float sensitivity = 100.0f;
+
+	// Camera constructor to set up initial values
+	Camera(WindowGUI& window, glm::vec3 position=glm::vec3(0.0f, 0.0f, 2.0f));
+
+	// Updates and exports the camera matrix to the Vertex Shader
+	void Matrix(float FOVdeg, float nearPlane, float farPlane, ShaderUtil& shader, const char* uniform);
+	// Handles camera inputs
+	void Inputs();
 };

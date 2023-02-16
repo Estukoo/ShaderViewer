@@ -67,7 +67,7 @@ void WindowGUI::Loop()
 
         /* Camera */
         mCamera->Inputs();
-        mCamera->Matrix(45.0f, 0.1f, 100.0f, mShaderUtil.GetProgram(), "viewProjMatrix"); // Envoyer la matrice de la caméra au shader
+        mCamera->Matrix(45.0f, 0.1f, 100.0f, mShaderUtil, "viewProjMatrix");
 
         Render();
 
