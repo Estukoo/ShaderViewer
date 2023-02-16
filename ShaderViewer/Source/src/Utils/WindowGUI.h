@@ -25,6 +25,7 @@ public:
 	 
 	bool GetKey(int key) const;
 	GLFWwindow* GetWindow();
+	ShaderUtil GetShaderUtil();
 
 	/* Utils members*/
 	int mWidth;

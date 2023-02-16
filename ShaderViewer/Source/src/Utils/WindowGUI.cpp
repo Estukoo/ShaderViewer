@@ -66,8 +66,8 @@ void WindowGUI::Loop()
         CalculateUtilsMembers();
 
         /* Camera */
-        mCamera->Inputs();
-        mCamera->Matrix(45.0f, 0.1f, 100.0f, mShaderUtil, "viewProjMatrix");
+        mCamera->HandleInput(*this);
+        mCamera->Update(mShaderUtil, "viewProjMatrix");
 
         Render();
 
@@ -89,6 +89,11 @@ bool WindowGUI::GetKey(int key) const
 GLFWwindow*  WindowGUI::GetWindow()
 {
     return mWindow;
+}
+
+ShaderUtil WindowGUI::GetShaderUtil()
+{
+    return mShaderUtil;
 }
 
 void WindowGUI::CalculateUtilsMembers()

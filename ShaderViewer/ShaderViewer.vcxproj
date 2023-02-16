@@ -32,7 +32,6 @@
     <ClInclude Include="Source\src\ShaderUtil.h" />
     <ClInclude Include="Source\src\Type\BufArray.h" />
     <ClInclude Include="Source\src\Utils\Camera.h" />
-    <ClInclude Include="Source\src\Utils\Camera.hpp" />
     <ClInclude Include="Source\src\Utils\ShaderUtil.h" />
     <ClInclude Include="Source\src\Utils\Type\BufArray.h" />
     <ClInclude Include="Source\src\Utils\VertexBuffer.hpp" />
