@@ -8,6 +8,7 @@
 
 class WindowGUI {
 public:
+	WindowGUI();
 	WindowGUI(unsigned int width, unsigned int height, const std::string& title);
 	~WindowGUI();
 
@@ -20,13 +21,13 @@ public:
 	void Render();
 
 	/* Utils members*/
-	int width;
-	int height;
-	float time;
+	int mWidth;
+	int mHeight;
+	float mTime;
 
 private:
 	void CalculateUtilsMembers();
 	
-	GLFWwindow* window;
-	ShaderUtil shader_util;
+	GLFWwindow* mWindow;
+	ShaderUtil mShaderUtil;
 };

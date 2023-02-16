@@ -1,25 +1,28 @@
 #include "WindowGUI.h"
 
-WindowGUI::WindowGUI(unsigned int width, unsigned int height, const std::string& title) : width(width), height(height) {
+WindowGUI::WindowGUI() : mWidth(0), mHeight(0), mTime(0.0f) {}
+
+WindowGUI::WindowGUI(unsigned int width, unsigned int height, const std::string &title) : mWidth(width), mHeight(height), mTime(0.0f)
+{
     if (!glfwInit()) {
         std::cerr << "Failed to initialize GLFW." << std::endl;
         exit(-1);
     }
 
-    window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
-    if (!window) {
+    mWindow = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
+    if (!mWindow) {
         std::cerr << "Failed to create GLFW window." << std::endl;
         glfwTerminate();
         exit(-1);
     }
 
-    glfwMakeContextCurrent(window);
+    glfwMakeContextCurrent(mWindow);
 }
 
 WindowGUI::~WindowGUI() {
     glfwTerminate();
     
-    delete window;
+    delete mWindow;
 }
 
 void WindowGUI::InitGLEW()
@@ -36,8 +39,8 @@ void WindowGUI::InitGLEW()
 
 void WindowGUI::InitShaderUtil(const std::string& vertex_shader_file, const std::string& fragment_shader_file)
 {
-    shader_util = ShaderUtil(vertex_shader_file, fragment_shader_file);
-    shader_util.Use();
+    mShaderUtil = ShaderUtil(vertex_shader_file, fragment_shader_file);
+    mShaderUtil.Use();
 }
 
 void WindowGUI::Clear(float red, float green, float blue, float alpha)
@@ -59,17 +62,17 @@ void WindowGUI::Loop()
 
         Render();
 
-        glfwSwapBuffers(window);
+        glfwSwapBuffers(mWindow);
         glfwPollEvents();
     }
 }
 
 void WindowGUI::CalculateUtilsMembers()
 {
-	glfwGetFramebufferSize(window, &width, &height);
-	time = (float)glfwGetTime();
+	glfwGetFramebufferSize(mWindow, &mWidth, &mHeight);
+	mTime = (float)glfwGetTime();
 }
 
 bool WindowGUI::ShouldClose() {
-    return glfwWindowShouldClose(window);
+    return glfwWindowShouldClose(mWindow);
 }
