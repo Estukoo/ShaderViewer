@@ -42,13 +42,12 @@ public:
 private:
     GLuint mVertexShader;
     GLuint mFragmentShader;
-    
 
     std::string ReadShaderFile(const std::string& file_path);
     GLuint GetCompiledShader(unsigned int shader_type, const std::string& shader_source);
 };
 
-template<typename T>
+template <typename T>
 inline void ShaderUtil::SetAttribute(const std::string& attribute_name, const BufArray<T>& data)
 {
     GLuint attrDataLocation = glGetAttribLocation(mProgramId, attribute_name.c_str());
@@ -56,7 +55,7 @@ inline void ShaderUtil::SetAttribute(const std::string& attribute_name, const Bu
     glEnableVertexAttribArray(attrDataLocation);
 }
 
-template<typename T>
+template <typename T>
 inline void ShaderUtil::DrawVertex(const BufArray<T>& data)
 {
     const T* arr = data.data();
@@ -64,7 +63,8 @@ inline void ShaderUtil::DrawVertex(const BufArray<T>& data)
 }
 
 template <typename T>
-inline void ShaderUtil::SetUBO(const std::string& name, const BufArray<T>& data, unsigned int slot) {
+inline void ShaderUtil::SetUBO(const std::string& name, const BufArray<T>& data, unsigned int slot)
+{
     GLuint ubo_index = glGetUniformBlockIndex(mProgramId, name.c_str());
     glUniformBlockBinding(mProgramId, ubo_index, slot);
 

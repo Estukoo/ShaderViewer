@@ -4,9 +4,20 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-WindowGUI::WindowGUI() : mWidth(0), mHeight(0), mTime(0.0f) {}
+WindowGUI* WindowGUI::instance = nullptr;
 
-WindowGUI::WindowGUI(unsigned int width, unsigned int height, const std::string &title) : mWidth(width), mHeight(height), mTime(0.0f)
+WindowGUI::WindowGUI()
+    : mWidth(0)
+    , mHeight(0)
+    , mTime(0.0f)
+{
+    instance = this;
+}
+
+WindowGUI::WindowGUI(unsigned int width, unsigned int height, const std::string& title)
+    : mWidth(width)
+    , mHeight(height)
+    , mTime(0.0f)
 {
     if (!glfwInit()) {
         std::cerr << "Failed to initialize GLFW." << std::endl;
@@ -21,11 +32,14 @@ WindowGUI::WindowGUI(unsigned int width, unsigned int height, const std::string 
     }
 
     glfwMakeContextCurrent(mWindow);
+
+    instance = this;
 }
 
-WindowGUI::~WindowGUI() {
+WindowGUI::~WindowGUI()
+{
     glfwTerminate();
-    
+
     delete mWindow;
     delete mCamera;
 }
@@ -33,12 +47,11 @@ WindowGUI::~WindowGUI() {
 void WindowGUI::InitGLEW()
 {
     GLenum err = glewInit();
-	if (GLEW_OK != err)
-	{
-		fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
+    if (GLEW_OK != err) {
+        fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
         exit(-1);
-	}
-    
+    }
+
     fprintf(stdout, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 }
 
@@ -54,19 +67,18 @@ void WindowGUI::Clear(float red, float green, float blue, float alpha)
 }
 
 void WindowGUI::Loop()
-{        
+{
     CalculateUtilsMembers();
-    
+
     PreRender();
 
-    while (!ShouldClose())
-    {
+    while (!ShouldClose()) {
         glClear(GL_COLOR_BUFFER_BIT);
 
         CalculateUtilsMembers();
 
         /* Camera */
-        mCamera->HandleInput(*this);
+        mCamera->HandleInput();
         mCamera->Update(mShaderUtil, "viewProjMatrix");
 
         Render();
@@ -79,6 +91,7 @@ void WindowGUI::Loop()
 void WindowGUI::SetCamera()
 {
     mCamera = new Camera(*this);
+    glfwSetScrollCallback(mWindow, ScrollCallback);
 }
 
 bool WindowGUI::GetKey(int key) const
@@ -86,7 +99,7 @@ bool WindowGUI::GetKey(int key) const
     return glfwGetKey(mWindow, key) == GLFW_PRESS;
 }
 
-GLFWwindow*  WindowGUI::GetWindow()
+GLFWwindow* WindowGUI::GetWindow()
 {
     return mWindow;
 }
@@ -96,12 +109,19 @@ ShaderUtil WindowGUI::GetShaderUtil()
     return mShaderUtil;
 }
 
-void WindowGUI::CalculateUtilsMembers()
+void WindowGUI::ScrollCallback(GLFWwindow* window, double xoffset, double yoffset)
 {
-	glfwGetFramebufferSize(mWindow, &mWidth, &mHeight);
-	mTime = (float)glfwGetTime();
+    if (instance && instance->mCamera)
+        instance->mCamera->ProcessScroll(yoffset);
 }
 
-bool WindowGUI::ShouldClose() {
+void WindowGUI::CalculateUtilsMembers()
+{
+    glfwGetFramebufferSize(mWindow, &mWidth, &mHeight);
+    mTime = (float)glfwGetTime();
+}
+
+bool WindowGUI::ShouldClose()
+{
     return glfwWindowShouldClose(mWindow);
 }
