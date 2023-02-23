@@ -63,6 +63,9 @@ void WindowGUI::InitShaderUtil(const std::string& vertex_shader_file, const std:
 
 void WindowGUI::Clear(float red, float green, float blue, float alpha)
 {
+    glEnable(GL_DEPTH_TEST);
+    glDepthMask(GL_TRUE);
+    glDepthFunc(GL_LESS);
     glClearColor(red, green, blue, alpha);
 }
 
@@ -73,7 +76,7 @@ void WindowGUI::Loop()
     PreRender();
 
     while (!ShouldClose()) {
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         CalculateUtilsMembers();
 
